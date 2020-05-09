@@ -23,3 +23,11 @@ resource "azurerm_servicebus_topic" "example" {
   requires_duplicate_detection = true
   support_ordering             = true
 }
+
+resource "azurerm_servicebus_subscription"  "example1" {
+  name                = "example1-sevicebus-subscription"
+  resource_group_name = azurerm_resource_group.example.name
+  namespace_name      = azurerm_servicebus_namespace.example.name
+  topic_name          = azurerm_servicebus_topic.example.name
+  max_delivery_count  = 1
+}
